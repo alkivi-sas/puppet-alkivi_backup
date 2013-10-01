@@ -1,1 +1,2 @@
-* Add more keys in configuration to have a more flexible sshd_config
+* Passphrase generation is messy
+* some parameters sucks (encryption should be boolean)
