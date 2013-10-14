@@ -68,6 +68,18 @@ ENCRYPTION='<%= @encryption %>'
 PASSPHRASE="<%= @passphrase %>"
 <% end %>
 
+
+# Related to hubic
+<% if @hubic_client_id %>
+HUBIC_CLIENT_ID="<%= @hubic_client_id %>"
+<% end %>
+<% if @hubic_client_secret %>
+HUBIC_CLIENT_SECRET="<%= @hubic_client_secret %>"
+<% end %>
+<% if @hubic_refresh_token %>
+HUBIC_REFRESH_TOKEN="<%= @hubic_refresh_token %>"
+<% end %>
+
 # Specify which GPG keys you would like to use (even if you have only one).
 # If you are running this from a cron, it is highly recommended to create separate 
 # signature and encryption keys, because you have to specify the password for the 
