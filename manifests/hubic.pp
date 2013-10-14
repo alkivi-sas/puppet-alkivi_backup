@@ -74,7 +74,7 @@ class alkivi_backup::hubic (
 
   # Add file to the right places
   file { '/usr/share/pyshared/duplicity/backends/hubicbackend.py':
-    source => 'puppet:///alkivi_backup/hubic/hubicbackend.py',
+    source => 'puppet:///modules/alkivi_backup/hubic/hubicbackend.py',
   }
 
   file { '/usr/lib/python2.7/dist-packages/duplicity/backends/hubicbackend.py':
@@ -104,6 +104,10 @@ class alkivi_backup::hubic (
     weekday => ['5'],
   }
 
+
+  package { 'python-swift':
+    ensure => installed
+  }
 
 
 }
