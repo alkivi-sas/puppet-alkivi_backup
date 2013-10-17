@@ -1,5 +1,5 @@
 name    'alkivi-alkivi_backup'
-version '0.0.1'
+version '0.0.2'
 source 'https://github.com/alkivi-sas/puppet-alkivi_backup'
 author 'alkivi'
 license 'LGPLv3'

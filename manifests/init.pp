@@ -17,8 +17,8 @@ class alkivi_backup (
   $clean_up_type     = 'remove-all-but-n-full',
   $clean_up_variable = '2',
 
-  $logdir            = '/home/alkivi/logs/',
-  $log_file          = 'backup-`date +%Y-%m-%d_%H-%M`.txt',
+  $logdir            = '/home/alkivi/logs/backup/',
+  $log_file          = 'backup-`date +%Y-%m-%d`.txt',
   $log_owner         = 'alkivi:alkivi',
   $verbosity         = '-v3',
 

@@ -11,12 +11,12 @@ class alkivi_backup::hubic (
   $encryption        = 'yes',
   $root              = '/',
 
-  $static_options    = '--full-if-older-than 14D --s3-use-new-style',
+  $static_options    = '',
   $clean_up_type     = 'remove-all-but-n-full',
   $clean_up_variable = '2',
 
-  $logdir            = '/home/alkivi/logs/',
-  $log_file          = 'backup-`date +%Y-%m-%d_%H-%M`.txt',
+  $logdir            = '/home/alkivi/logs/hubic/',
+  $log_file          = 'backup-`date +%Y-%m-%d`.txt',
   $log_owner         = 'alkivi:alkivi',
   $verbosity         = '-v3',
 
