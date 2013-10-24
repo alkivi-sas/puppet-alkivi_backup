@@ -29,11 +29,30 @@ class { alkivi_backup:
 }
 ```
 
+### Example for mysql
+```puppet
+class { alkivi_backup::mysql:
+  server => 'web.alkivi.fr',
+}
+```
+check .pp file for more configuration
+
+### Example for postgresql
+```puppet
+class { alkivi_backup::postgresql:
+  server => 'localhost',
+}
+```
+
+check .pp file for more configuration
+
 
 
 ## Credits
 
 Original executable comes from duplicity backup : http://zertrin.org/projects/duplicity-backup/
+Mysql backup comes from : http://sourceforge.net/projects/automysqlbackup/
+Postgresql comes from : https://github.com/adamfeuer/pgsqlbackup-tools/blob/master/autopgsqlbackup
 
 ## Limitations
 
