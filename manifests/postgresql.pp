@@ -1,5 +1,6 @@
 class alkivi_backup::postgresql(
   $server             = 'localhost',
+  $backup_dir         = '/home/backup-pgsql',
   $db_exclude         = [],
   $do_monthly         = '02',
   $do_weekly          = '6',
@@ -27,7 +28,7 @@ class alkivi_backup::postgresql(
     require => File['/root/alkivi-scripts/'],
   }
 
-  file { '/root/backup-pgsql':
+  file { $backup_dir:
     ensure => directory,
     mode   => '0750',
   }

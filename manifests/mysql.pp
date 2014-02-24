@@ -1,5 +1,6 @@
 class alkivi_backup::mysql(
   $server,
+  $backup_dir         = '/home/backup-mysql',
   $db_exclude         = ['information_schema', 'performance_schema', 'mysql' ],
   $do_monthly         = '02',
   $do_weekly          = '6',
@@ -27,7 +28,7 @@ class alkivi_backup::mysql(
     require => File['/root/alkivi-scripts/'],
   }
 
-  file { '/root/backup-mysql':
+  file { $backup_dir:
     ensure => directory,
     mode   => '0750',
   }
