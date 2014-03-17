@@ -5,7 +5,7 @@ class alkivi_backup::server (
   validate_hash($customers)
   validate_hash($extra)
 
-  $customers.each { |$name, $dataHash|
+  $customers.each |$name, $dataHash| {
     if($dataHash['remote_backup'])
     {
       validate_string($dataHash['local_user'])
@@ -40,7 +40,7 @@ class alkivi_backup::server (
     }
   }
 
-  $extra.each { |$name, $login|
+  $extra.each |$name, $login| {
     user { $login:
       ensure => present,
       home   => "/home/alkivi-backup/$name",
