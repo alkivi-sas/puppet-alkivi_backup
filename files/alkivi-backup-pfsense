@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+CONFIG="/etc/alkivi.conf.d/backup-pfsense.conf"
+
+##############################################################
+# Script Happens Below This Line - Shouldn't Require Editing #
+##############################################################
+
+usage(){
+    echo "USAGE:
+    `basename $0` [options]
+
+    -c, --config CONFIG_FILE   specify the config file to use
+
+    Perform backup of pfsense
+    "
+}
+
+while getopts ":c:t:bfvlsn-:" opt; do
+  case $opt in
+    # parse long options (a bit tricky because builtin getopts does not
+    # manage long options and i don't want to impose GNU getopt dependancy)
+    -)
+      case "$OPTARG" in
+        config) # set the config file from the command line
+          # We try to find the config file
+          if [ ! -z "${!OPTIND:0:1}" -a ! "${!OPTIND:0:1}" = "-" ]; then
+            CONFIG=${!OPTIND}
+   
+         OPTIND=$(( $OPTIND + 1 )) # we found it, move forward in arg parsing
+          fi
+        ;;
+        esac
+    ;;
+    # here are parsed the short options
+    c) CONFIG=$OPTARG;; # set the config file from the command line
+    esac
+done
+
+
+BACKUPDIR="/home/alkivi/backup-pfsense"
+PORT="443"
+GZIP="/bin/gzip"
+FIND="/usr/bin/find"
+BACKUPDAYS="30"
+
+# Read config file if specified
+if [ ! -z "$CONFIG" -a -f "$CONFIG" ];
+then
+    . $CONFIG
+else
+    echo "ERROR: can't find config file! (${CONFIG})" >&2
+    usage
+    exit 1
+fi
+
+
+# Check variables
+if [ -z $USERNAME ]; 
+then
+    echo "ERROR : empty username, check ${CONFIG} and add it"
+    exit 1
+fi
+
+if [ -z $PASSWORD ]; 
+then
+    echo "ERROR : empty password, check ${CONFIG} and add it"
+    exit 1
+fi
+
+if [ -z $SITE ];
+then
+    echo "ERROR : empty site, check ${CONFIG} and add it"
+fi
+
+TMPFILE="/tmp/cookies-${SITE}.txt"
+
+wget -qO/dev/null --keep-session-cookies --save-cookies $TMPFILE --post-data 'login=Login&usernamefld='$USERNAME'&passwordfld='$PASSWORD'' --no-check-certificate --timeout=10 https://$SITE:$PORT/diag_backup.php > /dev/null 2>&1
+
+if [ -e $TMPFILE ]; then
+    FILENAME="$BACKUPDIR/config-$SITE-`date +%Y%m%d%H%M%S`.xml"
+    wget --keep-session-cookies --load-cookies $TMPFILE --post-data 'Submit=download&donotbackuprrd=1' --timeout=10 https://$SITE:$PORT/diag_backup.php --no-check-certificate -O $BACKUPDIR/config-$SITE-`date +%Y%m%d%H%M%S`.xml > /dev/null 2>&1
+    rm -f $TMPFILE
+    $GZIP $FILENAME
+else
+    echo "Failed to retrieve backup from $SITE"
+fi
+
+
+$FIND $BACKUPDIR -type f -name "*.xml.gz" -mtime +$BACKUPDAYS -exec rm {} \;
