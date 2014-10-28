@@ -13,7 +13,7 @@ class alkivi_backup (
   $ssh_dir           = '',
   $file_dir          = '',
 
-  $static_options    = '--full-if-older-than 14D --s3-use-new-style',
+  $static_options    = '--full-if-older-than 14D --s3-use-new-style --archive-dir=/home/alkivi/.duplicity-cache',
   $clean_up_type     = 'remove-all-but-n-full',
   $clean_up_variable = '2',
 
