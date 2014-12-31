@@ -28,6 +28,13 @@ class alkivi_backup (
 
   $mail_command      = 'sendmail',
 
+  $swift_username    = undef,
+  $swift_password    = undef,
+  $swift_authurl     = undef,
+  $swift_authversion = undef,
+  $swift_tenantname  = undef,
+  $swift_region      = undef,
+  $swift_container   = undef,
 
 ) {
 
@@ -56,6 +63,17 @@ class alkivi_backup (
   elsif($backup_method == 'file')
   {
     $dest = "file://${file_dir}"
+  }
+  elsif($backup_method == 'swift')
+  {
+    validate_string($swift_username)
+    validate_string($swift_password)
+    validate_string($swift_authurl)
+    validate_string($swift_authversion)
+    validate_string($swift_tenantname)
+    validate_string($swift_region)
+    $dest = "swift://${swift_container}"
+
   }
   else
   {

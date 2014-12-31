@@ -69,6 +69,14 @@ PASSPHRASE="<%= @passphrase %>"
 <% end %>
 
 
+# Related to swift (RunAbove & co)
+<% if @swift_username %>SWIFT_USERNAME="<%= @swift_username %>"<% end %>
+<% if @swift_password %>SWIFT_PASSWORD="<%= @swift_password %>"<% end %>
+<% if @swift_authurl %>SWIFT_AUTHURL="<%= @swift_authurl %>"<% end %>
+<% if @swift_authversion %>SWIFT_AUTHVERSION="<%= @swift_authversion %>"<% end %>
+<% if @swift_tenantname %>SWIFT_TENANTNAME="<%= @swift_tenantname %>"<% end %>
+<% if @swift_region %>SWIFT_REGION="<%= @swift_region %>"<% end %>
+
 # Related to hubic
 <% if @hubic_client_id %>
 HUBIC_CLIENT_ID="<%= @hubic_client_id %>"

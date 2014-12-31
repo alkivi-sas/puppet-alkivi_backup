@@ -16,6 +16,13 @@ class alkivi_backup::config (
     $email_from        = $alkivi_backup::email_from,
     $email_subject     = $alkivi_backup::email_subject,
     $mail_command      = $alkivi_backup::mail_command,
+    $swift_username    = $alkivi_backup::swift_username,
+    $swift_password    = $alkivi_backup::swift_password,
+    $swift_authurl     = $alkivi_backup::swift_authurl,
+    $swift_authversion = $alkivi_backup::swift_authversion,
+    $swift_tenantname  = $alkivi_backup::swift_tenantname,
+    $swift_region      = $alkivi_backup::swift_region,
+    $swift_container   = $alkivi_backup::swift_container,
 ) {
   File {
     ensure  => present,
