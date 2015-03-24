@@ -15,13 +15,13 @@
 # Basic Settings
 
 # Username to access the MySQL server e.g. dbuser
-CONFIG_mysql_dump_username='root'
+CONFIG_mysql_dump_username='<%= @user %>'
 
 # Password to access the MySQL server e.g. password
-CONFIG_mysql_dump_password=`cat /root/.passwd/db/mysql`
+CONFIG_mysql_dump_password='<%= @password %>'
 
 # Host name (or IP address) of MySQL server e.g localhost
-CONFIG_mysql_dump_host='localhost'
+CONFIG_mysql_dump_host='<%= @host %>'
 
 # "Friendly" host name of MySQL server to be used in email log
 # if unset or empty (default) will use CONFIG_mysql_dump_host instead

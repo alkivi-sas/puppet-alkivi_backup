@@ -1,5 +1,8 @@
 class alkivi_backup::mysql(
   $server,
+  $user               = 'root',
+  $password           = undef,
+  $host               = 'localhost',
   $backup_dir         = '/home/backup-mysql',
   $db_exclude         = ['information_schema', 'performance_schema', 'mysql' ],
   $do_monthly         = '02',
@@ -35,7 +38,7 @@ class alkivi_backup::mysql(
 
   # Backup conf
   file { '/etc/alkivi.conf.d/backup-mysql.conf':
-    mode    => '0640',
+    mode    => '0400',
     content => template('alkivi_backup/backup-mysql.conf.erb'),
     require => File['/etc/alkivi.conf.d/'],
   }

@@ -147,7 +147,7 @@ EXCLIST=(  <%= @exclude_dir.join(' ') %>)
 # Useful examples are `--full-if-older-than` option and (for those using
 # Amazon S3 in Europe) `--s3-use-new-style` and `--s3-european-buckets` options
 # Be sure to separate your options with appropriate spacing.
-STATIC_OPTIONS="<%= @static_options %>"
+STATIC_OPTIONS="<%= @static_options.join(' ') %>"
 
 # FULL BACKUP & REMOVE OLDER THAN SETTINGS
 # Because duplicity will continue to add to each backup as you go,
